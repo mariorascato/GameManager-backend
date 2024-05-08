@@ -4,6 +4,7 @@ import it.unimol.mobile.gamemanager.model.Piattaforma;
 import it.unimol.mobile.gamemanager.model.game.Game;
 import lombok.Data;
 import lombok.NonNull;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,8 +20,11 @@ public class Player {
         giochiPosseduti = new ArrayList<>();
         giochiPreferiti = new ArrayList<>();
     }
+    @Id
+    private String id;
     private String username;
     @NonNull
+    @Indexed(unique = true)
     private String email;
     @NonNull
     private String password;
