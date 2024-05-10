@@ -1,5 +1,6 @@
 package it.unimol.mobile.gamemanager.controller;
 
+import it.unimol.mobile.gamemanager.model.game.Game;
 import it.unimol.mobile.gamemanager.model.player.Player;
 import it.unimol.mobile.gamemanager.service.PlayerService;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,21 @@ public class PlayerController {
     @PutMapping("updatePlayer/{id}")
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player,@PathVariable String id){
         return this.playerService.updatePlayer(player,id);
+    }
+    @DeleteMapping("deletePlayer/{id}")
+    public ResponseEntity<Player> deletePlayer(@PathVariable String id){
+        return this.playerService.deletePlayer(id);
+    }
+    @GetMapping("getPlayerByEmail/{email}")
+    public ResponseEntity<Player> getPlayerByEmail(@PathVariable String email){
+        return this.playerService.findPlayerByEmail(email);
+    }
+    @GetMapping("getGiochiPreferiti/{id}")
+    public ResponseEntity<List<Game>> getGiochiPreferiti(@PathVariable String id){
+        return this.playerService.getAllGiochiPreferiti(id);
+    }
+    @GetMapping("getGiochiPosseduti/{id}")
+    public ResponseEntity<List<Game>> getGiochiPosseduti(@PathVariable String id){
+        return this.playerService.getAllGiochiPosseduti(id);
     }
 }
