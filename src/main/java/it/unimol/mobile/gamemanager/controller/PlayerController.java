@@ -42,4 +42,8 @@ public class PlayerController {
     public ResponseEntity<List<Game>> getGiochiPosseduti(@PathVariable String id){
         return this.playerService.getAllGiochiPosseduti(id);
     }
+    @PutMapping("addGiocoPreferito/{id}/{nome}")
+    public ResponseEntity<Player> addGiocoPreferito(@PathVariable String id, @PathVariable String nome){
+        return this.playerService.addGiocoPreferito(id,nome);
+    }
 }

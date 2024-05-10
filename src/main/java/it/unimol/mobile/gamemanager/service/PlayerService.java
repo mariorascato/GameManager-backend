@@ -78,6 +78,27 @@ public class PlayerService {
         }
         return ResponseEntity.status(HttpStatus.OK).body(this.playerRepository.findById(id).get().getGiochiPreferiti());
     }
+    public ResponseEntity<Player> addGiocoPreferito(String id,String nomeGioco){
+        if(this.playerRepository.findById(id).isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+        }
+        for (Game game: this.playerRepository.findById(id).get().getGiochiPreferiti()) {
+            if(game.getNome().equalsIgnoreCase(nomeGioco)){
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            }
+        }
+        for (Game game: this.playerRepository.findById(id).get().getGiochiPosseduti()) {
+            if(game.getNome().equalsIgnoreCase(nomeGioco)){
+                Player player = this.playerRepository.findById(id).get();
+                player.getGiochiPreferiti().add(game);
+                playerRepository.save(player);
+                return ResponseEntity.status(HttpStatus.OK).body(player);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+    }
 
 
 

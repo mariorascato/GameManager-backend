@@ -1,5 +1,6 @@
 package it.unimol.mobile.gamemanager.repository;
 
+import it.unimol.mobile.gamemanager.model.Piattaforma;
 import it.unimol.mobile.gamemanager.model.game.Game;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,11 @@ import java.util.Optional;
 
 public interface GameRepository extends MongoRepository<Game,String> {
     public Optional<Game> getGameByNome(String nome);
-    public Optional<List<Game>> getGameBySviluppatore(String sviluppatore);
+    public Optional<List<Game>> getGamesBySviluppatore(String sviluppatore);
+
+    public Optional<List<Game>> getGamesByValutazioneBetween(int val1,int val2);
+
+    public Optional<List<Game>> getGamesByPiattaformeContaining(Piattaforma piattaforma);
 
 
 }
