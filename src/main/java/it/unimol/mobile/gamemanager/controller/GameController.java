@@ -1,5 +1,6 @@
 package it.unimol.mobile.gamemanager.controller;
 
+import it.unimol.mobile.gamemanager.model.Piattaforma;
 import it.unimol.mobile.gamemanager.model.game.Game;
 import it.unimol.mobile.gamemanager.model.player.Player;
 import it.unimol.mobile.gamemanager.service.GameService;
@@ -33,5 +34,17 @@ public class GameController {
     @DeleteMapping("deleteGame/{id}")
     public ResponseEntity<Game> deleteGame(@PathVariable String id){
         return this.gameService.deleteGame(id);
+    }
+    @GetMapping("getGamesBySviluppatore/{sviluppatore}")
+    public ResponseEntity<List<Game>> getGamesBySviluppatore(@PathVariable String sviluppatore){
+        return this.gameService.getGamesBySviluppatore(sviluppatore);
+    }
+    @GetMapping("getGamesByPiattaforma/{piattaforma}")
+    public ResponseEntity<List<Game>> getGamesByPiattaforma(@PathVariable Piattaforma piattaforma){
+        return this.gameService.getGamesByPiattaforma(piattaforma);
+    }
+    @GetMapping("getGamesByValutazioneBetween/{valore1}/{valore2}")
+    public ResponseEntity<List<Game>> getGamesByValutazioneBetween(@PathVariable int valore1,@PathVariable int valore2){
+        return this.gameService.getGamesByValutazioneBetween(valore1,valore2);
     }
 }

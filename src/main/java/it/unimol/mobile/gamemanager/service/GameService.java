@@ -1,5 +1,6 @@
 package it.unimol.mobile.gamemanager.service;
 
+import it.unimol.mobile.gamemanager.model.Piattaforma;
 import it.unimol.mobile.gamemanager.model.game.Game;
 import it.unimol.mobile.gamemanager.model.player.Player;
 import it.unimol.mobile.gamemanager.repository.GameRepository;
@@ -79,7 +80,25 @@ public class GameService {
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+    public ResponseEntity<List<Game>> getGamesBySviluppatore(String sviluppatore){
+        if(gameRepository.getGamesBySviluppatore(sviluppatore).isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gameRepository.getGamesBySviluppatore(sviluppatore).get());
+    }
+    public ResponseEntity<List<Game>> getGamesByPiattaforma(Piattaforma piattaforma){
+        if(gameRepository.getGamesByPiattaformeContaining(piattaforma).isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gameRepository.getGamesByPiattaformeContaining(piattaforma).get());
+    }
 
+    public ResponseEntity<List<Game>> getGamesByValutazioneBetween(int val1, int val2){
+        if(gameRepository.getGamesByValutazioneBetween(val1,val2).isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gameRepository.getGamesByValutazioneBetween(val1,val2).get());
+    }
 
 }
 
