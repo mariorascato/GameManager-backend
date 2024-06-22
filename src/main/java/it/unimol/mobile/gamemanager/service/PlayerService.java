@@ -1,6 +1,6 @@
 package it.unimol.mobile.gamemanager.service;
 
-import it.unimol.mobile.gamemanager.model.game.Game;
+import it.unimol.mobile.gamemanager.model.game_player.Game_Player;
 import it.unimol.mobile.gamemanager.model.player.Player;
 import it.unimol.mobile.gamemanager.repository.PlayerRepository;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -66,13 +65,13 @@ public class PlayerService {
         this.playerRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-    public ResponseEntity<List<Game>> getAllGiochiPosseduti(String id){
+    public ResponseEntity<List<Game_Player>> getAllGiochiPosseduti(String id){
         if(this.playerRepository.findById(id).isEmpty()){
            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(this.playerRepository.findById(id).get().getGiochiPosseduti());
     }
-    public ResponseEntity<List<Game>> getAllGiochiPreferiti(String id){
+    public ResponseEntity<List<Game_Player>> getAllGiochiPreferiti(String id){
         if(this.playerRepository.findById(id).isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
@@ -83,15 +82,15 @@ public class PlayerService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         }
-        for (Game game: this.playerRepository.findById(id).get().getGiochiPreferiti()) {
-            if(game.getNome().equalsIgnoreCase(nomeGioco)){
+        for (Game_Player gamePlayer : this.playerRepository.findById(id).get().getGiochiPreferiti()) {
+            if(gamePlayer.getNome().equalsIgnoreCase(nomeGioco)){
                 return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
         }
-        for (Game game: this.playerRepository.findById(id).get().getGiochiPosseduti()) {
-            if(game.getNome().equalsIgnoreCase(nomeGioco)){
+        for (Game_Player gamePlayer : this.playerRepository.findById(id).get().getGiochiPosseduti()) {
+            if(gamePlayer.getNome().equalsIgnoreCase(nomeGioco)){
                 Player player = this.playerRepository.findById(id).get();
-                player.getGiochiPreferiti().add(game);
+                player.getGiochiPreferiti().add(gamePlayer);
                 playerRepository.save(player);
                 return ResponseEntity.status(HttpStatus.OK).body(player);
             }

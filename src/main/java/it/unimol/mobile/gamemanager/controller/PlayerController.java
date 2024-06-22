@@ -1,6 +1,6 @@
 package it.unimol.mobile.gamemanager.controller;
 
-import it.unimol.mobile.gamemanager.model.game.Game;
+import it.unimol.mobile.gamemanager.model.game_player.Game_Player;
 import it.unimol.mobile.gamemanager.model.player.Player;
 import it.unimol.mobile.gamemanager.service.PlayerService;
 import lombok.AllArgsConstructor;
@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/gamemanager/player")
+
 public class PlayerController {
     private final PlayerService playerService;
     @PostMapping("addPlayer")
@@ -35,11 +36,11 @@ public class PlayerController {
         return this.playerService.findPlayerByEmail(email);
     }
     @GetMapping("getGiochiPreferiti/{id}")
-    public ResponseEntity<List<Game>> getGiochiPreferiti(@PathVariable String id){
+    public ResponseEntity<List<Game_Player>> getGiochiPreferiti(@PathVariable String id){
         return this.playerService.getAllGiochiPreferiti(id);
     }
     @GetMapping("getGiochiPosseduti/{id}")
-    public ResponseEntity<List<Game>> getGiochiPosseduti(@PathVariable String id){
+    public ResponseEntity<List<Game_Player>> getGiochiPosseduti(@PathVariable String id){
         return this.playerService.getAllGiochiPosseduti(id);
     }
     @PutMapping("addGiocoPreferito/{id}/{nome}")
