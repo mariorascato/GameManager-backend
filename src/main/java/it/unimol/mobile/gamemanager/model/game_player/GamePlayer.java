@@ -1,19 +1,14 @@
 package it.unimol.mobile.gamemanager.model.game_player;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import it.unimol.mobile.gamemanager.model.Game;
-import it.unimol.mobile.gamemanager.model.Piattaforma;
+import it.unimol.mobile.gamemanager.model.game.Game;
 import it.unimol.mobile.gamemanager.model.player.Player;
 import jakarta.persistence.*;
 import lombok.Data;
 
-
-
-import java.util.List;
-
 @Data
 @Entity
-public class Game_Player {
+public class GamePlayer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +23,13 @@ public class Game_Player {
     private int oreDiGioco;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Player player;
-    @JsonIgnore
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Game game;
+
+    private Boolean preferito;
 
 
 }

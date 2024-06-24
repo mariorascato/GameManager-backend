@@ -1,8 +1,7 @@
 package it.unimol.mobile.gamemanager.service;
 
-import it.unimol.mobile.gamemanager.model.Game;
-import it.unimol.mobile.gamemanager.model.Piattaforma;
-import it.unimol.mobile.gamemanager.model.game_player.Game_Player;
+import it.unimol.mobile.gamemanager.model.game.Game;
+import it.unimol.mobile.gamemanager.model.game_player.GamePlayer;
 import it.unimol.mobile.gamemanager.model.player.Player;
 import it.unimol.mobile.gamemanager.repository.GameRepository;
 import it.unimol.mobile.gamemanager.repository.Game_PlayerRepository;
@@ -16,13 +15,13 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class Game_PlayerService {
+public class GamePlayerService {
 
     private final Game_PlayerRepository gamePlayerRepository;
     private final PlayerRepository playerRepository;
     private final GameRepository gameRepository;
 
-    public ResponseEntity<Game_Player> addGame(Long id_game, Long id_player,Game_Player gamePlayer){
+    public ResponseEntity<GamePlayer> addGame(Long id_game, Long id_player, GamePlayer gamePlayer){
         if(playerRepository.findById(id_player).isEmpty()){
            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } else if (gameRepository.findById(id_game).isEmpty()) {
@@ -31,6 +30,13 @@ public class Game_PlayerService {
         Player player = playerRepository.findById(id_player).get();
         Game game = gameRepository.findById(id_game).get();
 
+        List<GamePlayer> giochiPosseduti = player.getGiochiPosseduti();
+        for (GamePlayer gp:giochiPosseduti) {
+            if(gp.getGame().getId().equals(game.getId())){
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+            }
+        }
+
         gamePlayer.setPlayer(player);
         gamePlayer.setGame(game);
 
@@ -38,11 +44,11 @@ public class Game_PlayerService {
 
         return ResponseEntity.status(HttpStatus.OK).body(gamePlayer);
     }
-    public ResponseEntity<Game_Player> updateGame(Game_Player gamePlayer, Long id){
+    public ResponseEntity<GamePlayer> updateGame(GamePlayer gamePlayer, Long id){
         if (!gamePlayerRepository.findById(id).isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } else {
-            Game_Player gamePlayerToUpdate = gamePlayerRepository.findById(id).get();
+            GamePlayer gamePlayerToUpdate = gamePlayerRepository.findById(id).get();
 
             gamePlayerToUpdate.setImmagineURL(gamePlayer.getImmagineURL());
             gamePlayerToUpdate.setValutazione(gamePlayer.getValutazione());
@@ -65,13 +71,13 @@ public class Game_PlayerService {
         }
         return ResponseEntity.status(HttpStatus.OK).body(gamePlayerRepository.findById(id_game).get().getPlayer());
     }
-    public ResponseEntity<List<Game_Player>> getAll(){
+    public ResponseEntity<List<GamePlayer>> getAll(){
         if(gamePlayerRepository.findAll().isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(gamePlayerRepository.findAll());
     }
-    public ResponseEntity<Game_Player> deleteGamePlayer(Long id){
+    public ResponseEntity<GamePlayer> deleteGamePlayer(Long id){
         if(gamePlayerRepository.findById(id).isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
@@ -80,25 +86,7 @@ public class Game_PlayerService {
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-    public ResponseEntity<List<Game_Player>> getGamesBySviluppatore(String sviluppatore){
-        if(gamePlayerRepository.getGamesBySviluppatore(sviluppatore).isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(gamePlayerRepository.getGamesBySviluppatore(sviluppatore).get());
-    }
-    public ResponseEntity<List<Game_Player>> getGamesByPiattaforma(Piattaforma piattaforma){
-        if(gamePlayerRepository.getGame_PlayersByPiattaformeContaining(piattaforma).isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(gamePlayerRepository.getGame_PlayersByPiattaformeContaining(piattaforma).get());
-    }
 
-    public ResponseEntity<List<Game_Player>> getGamesByValutazioneBetween(int val1, int val2){
-        if(gamePlayerRepository.getGame_PlayersByValutazioneBetween(val1,val2).isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(gamePlayerRepository.getGame_PlayersByValutazioneBetween(val1,val2).get());
-    }
 
 }
 

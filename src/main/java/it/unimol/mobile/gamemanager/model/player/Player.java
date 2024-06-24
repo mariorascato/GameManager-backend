@@ -1,11 +1,9 @@
 package it.unimol.mobile.gamemanager.model.player;
 
 import it.unimol.mobile.gamemanager.model.Piattaforma;
-import it.unimol.mobile.gamemanager.model.game_player.Game_Player;
+import it.unimol.mobile.gamemanager.model.game_player.GamePlayer;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NonNull;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,10 +27,10 @@ public class Player {
     private Piattaforma piattaformaPreferita;
 
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
-    private List<Game_Player> giochiPosseduti;
+    @Column(unique = true)
+    private List<GamePlayer> giochiPosseduti;
 
-    @OneToMany(mappedBy = "player",cascade = CascadeType.ALL)
-    private List<Game_Player> giochiPreferiti;
+
 
 
 }

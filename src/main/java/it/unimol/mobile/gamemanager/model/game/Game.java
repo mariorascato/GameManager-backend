@@ -1,7 +1,8 @@
-package it.unimol.mobile.gamemanager.model;
+package it.unimol.mobile.gamemanager.model.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import it.unimol.mobile.gamemanager.model.game_player.Game_Player;
+import it.unimol.mobile.gamemanager.model.Piattaforma;
+import it.unimol.mobile.gamemanager.model.game_player.GamePlayer;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,9 +20,11 @@ public class Game {
     private String nome;
 
     private String sviluppatore;
+
+    @ElementCollection(targetClass = Piattaforma.class)
     private List<Piattaforma> piattaforme;
 
     @JsonIgnore
     @OneToMany(mappedBy = "game",cascade = CascadeType.ALL)
-    private List<Game_Player> gamePlayers;
+    private List<GamePlayer> gamePlayers;
 }
