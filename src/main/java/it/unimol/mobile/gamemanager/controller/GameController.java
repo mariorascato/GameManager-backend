@@ -13,12 +13,17 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
+@CrossOrigin("*")
 @RequestMapping("api/game-manager/game")
 public class GameController {
     private final GameService gameService;
     @PostMapping("addGame")
     public ResponseEntity<Game> addGame(@RequestBody Game game){
         return gameService.addGame(game);
+    }
+    @PostMapping("addGames")
+    public ResponseEntity<List<Game>> addGames(@RequestBody List<Game> games){
+        return gameService.addGames(games);
     }
     @PutMapping("updateGame/{id}")
     public ResponseEntity<Game> updateGame(@RequestBody Game game,@PathVariable Long id){

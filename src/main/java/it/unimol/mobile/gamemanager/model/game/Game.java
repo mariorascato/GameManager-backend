@@ -24,6 +24,8 @@ public class Game {
     @ElementCollection(targetClass = Piattaforma.class)
     private List<Piattaforma> piattaforme;
 
+    private String  immagineURL;
+
     @JsonIgnore
     @OneToMany(mappedBy = "game",cascade = CascadeType.ALL)
     private List<GamePlayer> gamePlayers;

@@ -50,5 +50,11 @@ public class GameService {
         gameRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body(game);
     }
+    public ResponseEntity<List<Game>> addGames(List<Game> games){
+        if(games.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        else return ResponseEntity.status(HttpStatus.OK).body(gameRepository.saveAll(games));
+    }
 
 }
