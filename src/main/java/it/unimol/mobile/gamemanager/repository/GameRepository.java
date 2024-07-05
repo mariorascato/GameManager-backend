@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game,Long> {
-    public Optional<List<Game>> findGamesByPiattaformeContaining(Piattaforma piattaforma);
+    public Optional<List<Game>> findGamesByPiattaformeContaining(List<String> piattaforme);
     public Optional<Game> findGameByNome(String nome);
 }

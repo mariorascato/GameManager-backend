@@ -21,6 +21,7 @@ public class Game {
 
     private String sviluppatore;
 
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> piattaforme;
 
     private String  immagineURL;
