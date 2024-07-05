@@ -21,6 +21,7 @@ public class GamePlayer {
     private int trofeiOttenuti;
     private int valutazione;
     private int oreDiGioco;
+    private String luogoCompletamento;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

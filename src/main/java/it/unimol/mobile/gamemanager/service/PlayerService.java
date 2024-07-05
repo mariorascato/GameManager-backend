@@ -86,14 +86,14 @@ public class PlayerService {
         }
         return ResponseEntity.status(HttpStatus.OK).body(giochiPreferiti);
     }
-    public ResponseEntity<GamePlayer> addGiocoToPreferiti(Long id_player,Long id_game){
+    public ResponseEntity<GamePlayer> setPreferito(Long id_player, Long id_game, boolean preferito){
         if(this.playerRepository.findById(id_player).isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         Player player = this.playerRepository.findById(id_player).get();
         for (GamePlayer gp:player.getGiochiPosseduti()) {
             if(gp.getId().equals(id_game)){
-                gp.setPreferito(true);
+                gp.setPreferito(preferito);
                 playerRepository.save(player);
 
                 return ResponseEntity.status(HttpStatus.OK).body(gp);

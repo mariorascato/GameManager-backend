@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin("*")
 @RequestMapping("api/game-manager/gamePlayer")
 public class GamePlayerController {
     private final GamePlayerService gamePlayerService;

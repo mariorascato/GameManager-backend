@@ -45,9 +45,9 @@ public class PlayerController {
     public ResponseEntity<List<GamePlayer>> getGiochiPreferiti(@PathVariable Long id){
         return this.playerService.getAllGiochiPreferiti(id);
     }
-    @PutMapping("addGiocoToPreferiti/{id_game}/{id_player}")
-    public ResponseEntity<GamePlayer> addGiocoToPreferiti(@PathVariable Long id_game,@PathVariable Long id_player){
-        return this.playerService.addGiocoToPreferiti(id_player,id_game);
+    @PutMapping("setPreferito/{id_game}/{id_player}/{preferito}")
+    public ResponseEntity<GamePlayer> addGiocoToPreferiti(@PathVariable Long id_game,@PathVariable Long id_player,@PathVariable boolean preferito){
+        return this.playerService.setPreferito(id_player,id_game,preferito);
     }
 
 }
