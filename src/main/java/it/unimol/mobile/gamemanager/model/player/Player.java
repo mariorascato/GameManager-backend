@@ -1,5 +1,6 @@
 package it.unimol.mobile.gamemanager.model.player;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unimol.mobile.gamemanager.model.Piattaforma;
 import it.unimol.mobile.gamemanager.model.game_player.GamePlayer;
 import jakarta.persistence.*;
@@ -26,8 +27,9 @@ public class Player {
     private LocalDate birthday;
     private Piattaforma piattaformaPreferita;
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Column(unique = true)
+    @JsonIgnore()
     private List<GamePlayer> giochiPosseduti;
 
 
