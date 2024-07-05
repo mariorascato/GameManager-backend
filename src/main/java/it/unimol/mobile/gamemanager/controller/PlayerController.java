@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(origins = {"*"})
 @RequestMapping("api/game-manager/player")
 
 public class PlayerController {

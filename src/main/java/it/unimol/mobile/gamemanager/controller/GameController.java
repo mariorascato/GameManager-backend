@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(origins = {"*"})
 @RequestMapping("api/game-manager/game")
 public class GameController {
     private final GameService gameService;

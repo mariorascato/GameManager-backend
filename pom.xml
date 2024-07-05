@@ -10,8 +10,8 @@
     </parent>
     <groupId>it.unimol.mobile</groupId>
     <artifactId>GameManager</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>Game Manager</name>
+    <version>1</version>
+    <name>game_manager</name>
     <description>Game Manager</description>
     <properties>
         <java.version>21</java.version>
@@ -22,8 +22,8 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
