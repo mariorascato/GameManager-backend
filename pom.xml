@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>it.unimol.mobile</groupId>
-    <artifactId>GameManager</artifactId>
+    <artifactId>game_manager</artifactId>
     <version>1</version>
-    <name>game_manager</name>
+    <name>GameManager</name>
     <description>Game Manager</description>
     <properties>
         <java.version>21</java.version>
