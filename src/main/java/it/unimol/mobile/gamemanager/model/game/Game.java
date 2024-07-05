@@ -21,8 +21,7 @@ public class Game {
 
     private String sviluppatore;
 
-    @ElementCollection(targetClass = Piattaforma.class)
-    private List<Piattaforma> piattaforme;
+    private List<String> piattaforme;
 
     private String  immagineURL;
 
