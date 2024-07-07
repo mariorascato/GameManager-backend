@@ -21,10 +21,12 @@ public class Game {
 
     private String sviluppatore;
 
-    @ElementCollection(targetClass = Piattaforma.class)
-    private List<Piattaforma> piattaforme;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> piattaforme;
 
     private String  immagineURL;
+    private boolean isNetworkImage;
+    private int trofeiTotali;
 
     @JsonIgnore
     @OneToMany(mappedBy = "game",cascade = CascadeType.ALL)
