@@ -31,6 +31,8 @@ public class GameService {
             gameToUpdate.setNome(game.getNome());
             gameToUpdate.setPiattaforme(game.getPiattaforme());
             gameToUpdate.setSviluppatore(game.getSviluppatore());
+            gameToUpdate.setTrofeiTotali(game.getTrofeiTotali());
+            gameToUpdate.setNetworkImage(game.isNetworkImage());
 
             this.gameRepository.save(gameToUpdate);
 

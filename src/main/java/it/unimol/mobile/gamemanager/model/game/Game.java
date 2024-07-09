@@ -25,6 +25,8 @@ public class Game {
     private List<String> piattaforme;
 
     private String  immagineURL;
+    private boolean isNetworkImage;
+    private int trofeiTotali;
 
     @JsonIgnore
     @OneToMany(mappedBy = "game",cascade = CascadeType.ALL)

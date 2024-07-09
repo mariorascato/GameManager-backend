@@ -50,11 +50,12 @@ public class GamePlayerService {
         } else {
             GamePlayer gamePlayerToUpdate = gamePlayerRepository.findById(id).get();
 
-            gamePlayerToUpdate.setImmagineURL(gamePlayer.getImmagineURL());
+            gamePlayerToUpdate.setImmagini(gamePlayer.getImmagini());
             gamePlayerToUpdate.setValutazione(gamePlayer.getValutazione());
             gamePlayerToUpdate.setOreDiGioco(gamePlayer.getOreDiGioco());
             gamePlayerToUpdate.setTrofeiOttenuti(gamePlayer.getTrofeiOttenuti());
-            gamePlayerToUpdate.setTrofeiTotali(gamePlayer.getTrofeiTotali());
+            gamePlayerToUpdate.setLuogoCompletamento(gamePlayer.getLuogoCompletamento());
+            gamePlayerToUpdate.setDataCompletamento(gamePlayer.getDataCompletamento());
 
             this.gamePlayerRepository.save(gamePlayerToUpdate);
 

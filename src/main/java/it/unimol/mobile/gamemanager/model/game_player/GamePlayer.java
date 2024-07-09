@@ -6,6 +6,8 @@ import it.unimol.mobile.gamemanager.model.player.Player;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 public class GamePlayer {
@@ -15,13 +17,14 @@ public class GamePlayer {
     private Long id;
 
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> immagini;
 
-    private String immagineURL;
-    private int trofeiTotali;
     private int trofeiOttenuti;
     private int valutazione;
     private int oreDiGioco;
     private String luogoCompletamento;
+    private String dataCompletamento;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
