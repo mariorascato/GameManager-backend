@@ -17,7 +17,7 @@ import java.util.List;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
-    private final Game_PlayerRepository gamePlayerRepository;
+
     public ResponseEntity<Player> addPlayer(Player player ){
         if(playerRepository.findByEmail(player.getEmail()).isPresent()){
            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
