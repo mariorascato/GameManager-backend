@@ -34,6 +34,7 @@ public class Player {
     private List<GamePlayer> giochiPosseduti;
 
     @OneToOne(mappedBy = "game", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @Column(unique = true)
     private GamePlayer giocoPreferito;
 
 }
