@@ -52,6 +52,7 @@ public class PlayerService {
             playerToUpdate.setUsername(player.getUsername());
             playerToUpdate.setPiattaformaPreferita(player.getPiattaformaPreferita());
             playerToUpdate.setGiochiPosseduti(player.getGiochiPosseduti());
+            playerToUpdate.setGiocoPreferito(player.getGiocoPreferito());
 
             this.playerRepository.save(playerToUpdate);
 
@@ -86,6 +87,7 @@ public class PlayerService {
         }
         return ResponseEntity.status(HttpStatus.OK).body(giochiPreferiti);
     }
+
     public ResponseEntity<GamePlayer> setPreferito(Long id_player, Long id_game, boolean preferito){
         if(this.playerRepository.findById(id_player).isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
