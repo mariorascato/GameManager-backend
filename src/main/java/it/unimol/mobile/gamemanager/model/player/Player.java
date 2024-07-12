@@ -33,7 +33,8 @@ public class Player {
     @JsonIgnore()
     private List<GamePlayer> giochiPosseduti;
 
-    @OneToOne(mappedBy = "game", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "gioco_preferito_id")
     private GamePlayer giocoPreferito;
 
 }
