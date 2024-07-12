@@ -33,7 +33,7 @@ public class Player {
     @JsonIgnore()
     private List<GamePlayer> giochiPosseduti;
 
-    @OneToOne(mappedBy = "player", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private Game giocoPreferito;
+    @OneToOne(mappedBy = "game", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private GamePlayer giocoPreferito;
 
 }
