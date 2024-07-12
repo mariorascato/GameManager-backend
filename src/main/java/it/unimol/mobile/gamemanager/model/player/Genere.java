@@ -1,6 +1,7 @@
 package it.unimol.mobile.gamemanager.model.player;
 
-public enum Sesso {
+public enum Genere {
     MASCHIO,
-    FEMMINA
+    FEMMINA,
+    NON_BINARIO
 }

@@ -2,7 +2,6 @@ package it.unimol.mobile.gamemanager.service;
 
 import it.unimol.mobile.gamemanager.model.game_player.GamePlayer;
 import it.unimol.mobile.gamemanager.model.player.Player;
-import it.unimol.mobile.gamemanager.repository.Game_PlayerRepository;
 import it.unimol.mobile.gamemanager.repository.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -48,7 +47,7 @@ public class PlayerService {
 
             playerToUpdate.setPassword(player.getPassword());
             playerToUpdate.setEmail(player.getEmail());
-            playerToUpdate.setSesso(player.getSesso());
+            playerToUpdate.setGenere(player.getGenere());
             playerToUpdate.setUsername(player.getUsername());
             playerToUpdate.setPiattaformaPreferita(player.getPiattaformaPreferita());
             playerToUpdate.setGiochiPosseduti(player.getGiochiPosseduti());
