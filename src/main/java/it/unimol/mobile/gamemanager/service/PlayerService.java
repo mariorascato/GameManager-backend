@@ -1,7 +1,9 @@
 package it.unimol.mobile.gamemanager.service;
 
+import it.unimol.mobile.gamemanager.model.game.Game;
 import it.unimol.mobile.gamemanager.model.game_player.GamePlayer;
 import it.unimol.mobile.gamemanager.model.player.Player;
+import it.unimol.mobile.gamemanager.repository.GameRepository;
 import it.unimol.mobile.gamemanager.repository.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import java.util.List;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final GameRepository gameRepository;
 
     public ResponseEntity<Player> addPlayer(Player player ){
         if(playerRepository.findByEmail(player.getEmail()).isPresent()){
@@ -103,7 +106,22 @@ public class PlayerService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    public ResponseEntity<Player> removeGiocoPreferito(Player player, Long id) {
+    public ResponseEntity<Player> addGiocoPreferito(Long id_player, Long id_game) {
+        if (playerRepository.findById(id_player).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else if (gameRepository.findById(id_game).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        Player player = playerRepository.findById(id_player).get();
+        Game game = gameRepository.findById(id_game).get();
+
+        player.setGiocoPreferito(game);
+
+        return ResponseEntity.status(HttpStatus.OK).body(player);
+    }
+
+    public ResponseEntity<Player> removeGiocoPreferito(Long id) {
         if (playerRepository.findById(id).isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } else {
