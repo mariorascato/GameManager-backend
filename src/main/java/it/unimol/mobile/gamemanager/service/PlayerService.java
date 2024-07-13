@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,16 +43,33 @@ public class PlayerService {
         }
         return ResponseEntity.status(HttpStatus.OK).body(playerRepository.findAll());
     }
+
+    public ResponseEntity<Player> addOrUpdateBirthday(Long id, String dateString) {
+        if (playerRepository.findById(id).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else {
+            Player playerToEdit = playerRepository.findById(id).get();
+
+            LocalDate birthday = LocalDate.parse(dateString);
+
+            playerToEdit.setBirthday(birthday);
+
+            playerRepository.save(playerToEdit);
+
+            return ResponseEntity.status(HttpStatus.OK).body(playerToEdit);
+        }
+    }
+
     public ResponseEntity<Player> updatePlayer(Player player,Long id) {
         if (!playerRepository.findById(id).isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } else {
             Player playerToUpdate = playerRepository.findById(id).get();
 
-            playerToUpdate.setPassword(player.getPassword());
-            playerToUpdate.setEmail(player.getEmail());
-            playerToUpdate.setGenere(player.getGenere());
             playerToUpdate.setUsername(player.getUsername());
+            playerToUpdate.setEmail(player.getEmail());
+            playerToUpdate.setPassword(player.getPassword());
+            playerToUpdate.setGenere(player.getGenere());
             playerToUpdate.setPiattaformaPreferita(player.getPiattaformaPreferita());
             playerToUpdate.setGiochiPosseduti(player.getGiochiPosseduti());
 
@@ -105,7 +123,7 @@ public class PlayerService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    public ResponseEntity<Player> addGiocoPreferito(Long id_player, Long id_game) {
+    public ResponseEntity<Player> addGiocoPreferito(Long id_player, Game game, Long id_game) {
         if (playerRepository.findById(id_player).isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } else if (gameRepository.findById(id_game).isEmpty()) {
@@ -113,7 +131,6 @@ public class PlayerService {
         }
 
         Player player = playerRepository.findById(id_player).get();
-        Game game = gameRepository.findById(id_game).get();
 
         player.setGiocoPreferito(game);
         playerRepository.save(player);
