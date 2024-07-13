@@ -54,7 +54,6 @@ public class PlayerService {
             playerToUpdate.setUsername(player.getUsername());
             playerToUpdate.setPiattaformaPreferita(player.getPiattaformaPreferita());
             playerToUpdate.setGiochiPosseduti(player.getGiochiPosseduti());
-            playerToUpdate.setGiocoPreferito(player.getGiocoPreferito());
 
             this.playerRepository.save(playerToUpdate);
 
