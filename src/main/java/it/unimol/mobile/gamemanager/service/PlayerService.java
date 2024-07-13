@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,13 +51,18 @@ public class PlayerService {
         } else {
             Player playerToEdit = playerRepository.findById(id).get();
 
-            LocalDate birthday = LocalDate.parse(dateString);
+            try {
+                LocalDate birthday = LocalDate.parse(dateString);
 
-            playerToEdit.setBirthday(birthday);
+                playerToEdit.setBirthday(birthday);
 
-            playerRepository.save(playerToEdit);
+                playerRepository.save(playerToEdit);
 
-            return ResponseEntity.status(HttpStatus.OK).body(playerToEdit);
+                return ResponseEntity.status(HttpStatus.OK).body(playerToEdit);
+
+            } catch (DateTimeParseException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
         }
     }
 

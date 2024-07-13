@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -26,12 +27,12 @@ public class PlayerController {
         return this.playerService.getAllPlayers();
     }
     @PostMapping("addBirthday/{id}")
-    public ResponseEntity<Player> addPlayerBirthday(@PathVariable Long id, @RequestBody String dateString) {
-        return this.playerService.addOrUpdateBirthday(id, dateString);
+    public ResponseEntity<Player> addPlayerBirthday(@PathVariable Long id, @RequestBody Map<String, String> request) {
+        return this.playerService.addOrUpdateBirthday(id, request.get("dateString"));
     }
     @PutMapping("updateBirthday/{id}")
-    public ResponseEntity<Player> updatePlayerBirthday(@PathVariable Long id, @RequestBody String dateString) {
-        return this.playerService.addOrUpdateBirthday(id, dateString);
+    public ResponseEntity<Player> updatePlayerBirthday(@PathVariable Long id, @RequestBody Map<String, String> request) {
+        return this.playerService.addOrUpdateBirthday(id, request.get("dateString"));
     }
     @PutMapping("updatePlayer/{id}")
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player,@PathVariable Long id){
