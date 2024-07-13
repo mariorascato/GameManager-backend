@@ -2,6 +2,7 @@ package it.unimol.mobile.gamemanager.model.player;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unimol.mobile.gamemanager.model.Piattaforma;
+import it.unimol.mobile.gamemanager.model.game.Game;
 import it.unimol.mobile.gamemanager.model.game_player.GamePlayer;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -33,7 +34,6 @@ public class Player {
     private List<GamePlayer> giochiPosseduti;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "gioco_preferito_id")
-    private GamePlayer giocoPreferito;
+    private Game giocoPreferito;
 
 }
