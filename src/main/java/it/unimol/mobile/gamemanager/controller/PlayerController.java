@@ -49,5 +49,8 @@ public class PlayerController {
     public ResponseEntity<GamePlayer> addGiocoToPreferiti(@PathVariable Long id_game,@PathVariable Long id_player,@PathVariable boolean preferito){
         return this.playerService.setPreferito(id_player,id_game,preferito);
     }
-
+    @PutMapping("removePreferito/{id}")
+    public ResponseEntity<Player> removeGiocoPreferito(@RequestBody Player player, @PathVariable Long id) {
+        return this.playerService.removeGiocoPreferito(player, id);
+    }
 }

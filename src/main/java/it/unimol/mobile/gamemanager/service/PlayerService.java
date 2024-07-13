@@ -103,7 +103,17 @@ public class PlayerService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    public ResponseEntity<Player> removeGiocoPreferito(Player player, Long id) {
+        if (playerRepository.findById(id).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else {
+            Player playerToUpdate = playerRepository.findById(id).get();
+            playerToUpdate.setGiocoPreferito(null);
+            this.playerRepository.save(playerToUpdate);
 
+            return ResponseEntity.status(HttpStatus.OK).body(playerToUpdate);
+        }
+    }
 
 
 }
