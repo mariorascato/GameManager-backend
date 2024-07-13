@@ -116,6 +116,7 @@ public class PlayerService {
         Game game = gameRepository.findById(id_game).get();
 
         player.setGiocoPreferito(game);
+        playerRepository.save(player);
 
         return ResponseEntity.status(HttpStatus.OK).body(player);
     }
@@ -126,7 +127,7 @@ public class PlayerService {
         } else {
             Player playerToUpdate = playerRepository.findById(id).get();
             playerToUpdate.setGiocoPreferito(null);
-            this.playerRepository.save(playerToUpdate);
+            playerRepository.save(playerToUpdate);
 
             return ResponseEntity.status(HttpStatus.OK).body(playerToUpdate);
         }
