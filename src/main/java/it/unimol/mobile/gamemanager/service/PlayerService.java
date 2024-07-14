@@ -95,7 +95,6 @@ public class PlayerService {
             playerToUpdate.setUsername(player.getUsername());
             playerToUpdate.setEmail(player.getEmail());
             playerToUpdate.setPassword(player.getPassword());
-            playerToUpdate.setGenere(player.getGenere());
             playerToUpdate.setPiattaformaPreferita(player.getPiattaformaPreferita());
             playerToUpdate.setGiochiPosseduti(player.getGiochiPosseduti());
 
