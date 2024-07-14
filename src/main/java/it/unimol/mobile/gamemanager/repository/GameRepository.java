@@ -1,7 +1,6 @@
 package it.unimol.mobile.gamemanager.repository;
 
 import it.unimol.mobile.gamemanager.model.game.Game;
-import it.unimol.mobile.gamemanager.model.Piattaforma;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

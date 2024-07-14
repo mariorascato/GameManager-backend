@@ -34,6 +34,14 @@ public class PlayerController {
     public ResponseEntity<Player> updatePlayerBirthday(@PathVariable Long id, @RequestBody Map<String, String> request) {
         return this.playerService.addOrUpdateBirthday(id, request.get("dateString"));
     }
+    @PostMapping("addGenere/{id}")
+    public ResponseEntity<Player> addPlayerGenere(@PathVariable Long id, @RequestBody Map<String, String> request) {
+        return this.playerService.addOrUpdateGenere(id, request.get("genere"));
+    }
+    @PutMapping("updateGenere/{id}")
+    public ResponseEntity<Player> updatePlayerGenere(@PathVariable Long id, @RequestBody Map<String, String> request) {
+        return this.playerService.addOrUpdateGenere(id, request.get("genere"));
+    }
     @PutMapping("updatePlayer/{id}")
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player,@PathVariable Long id){
         return this.playerService.updatePlayer(player,id);

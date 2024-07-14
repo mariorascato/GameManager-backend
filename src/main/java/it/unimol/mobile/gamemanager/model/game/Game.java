@@ -1,7 +1,6 @@
 package it.unimol.mobile.gamemanager.model.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import it.unimol.mobile.gamemanager.model.Piattaforma;
 import it.unimol.mobile.gamemanager.model.game_player.GamePlayer;
 import jakarta.persistence.*;
 import lombok.Data;

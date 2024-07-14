@@ -2,6 +2,7 @@ package it.unimol.mobile.gamemanager.service;
 
 import it.unimol.mobile.gamemanager.model.game.Game;
 import it.unimol.mobile.gamemanager.model.game_player.GamePlayer;
+import it.unimol.mobile.gamemanager.model.player.Genere;
 import it.unimol.mobile.gamemanager.model.player.Player;
 import it.unimol.mobile.gamemanager.repository.GameRepository;
 import it.unimol.mobile.gamemanager.repository.PlayerRepository;
@@ -63,6 +64,25 @@ public class PlayerService {
             } catch (DateTimeParseException e) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             }
+        }
+    }
+
+    public ResponseEntity<Player> addOrUpdateGenere(Long id, String genere) {
+        if (playerRepository.findById(id).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else {
+            Player playerToEdit = playerRepository.findById(id).get();
+            Genere genereToAdd = switch (genere) {
+                case "MASCHIO" -> Genere.MASCHIO;
+                case "FEMMINA" -> Genere.FEMMINA;
+                case "NON BINARIO" -> Genere.NON_BINARIO;
+                default -> null;
+            };
+
+            playerToEdit.setGenere(genereToAdd);
+            playerRepository.save(playerToEdit);
+
+            return ResponseEntity.status(HttpStatus.OK).body(playerToEdit);
         }
     }
 
