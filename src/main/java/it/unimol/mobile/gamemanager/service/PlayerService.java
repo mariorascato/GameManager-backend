@@ -147,7 +147,7 @@ public class PlayerService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    public ResponseEntity<Player> addGiocoPreferito(Long id_player, Game game, Long id_game) {
+    public ResponseEntity<Player> addOrUpdateGiocoPreferito(Long id_player, Game game, Long id_game) {
         if (playerRepository.findById(id_player).isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } else if (gameRepository.findById(id_game).isEmpty()) {
