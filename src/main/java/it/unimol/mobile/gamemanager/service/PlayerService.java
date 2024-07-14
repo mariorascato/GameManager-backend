@@ -75,8 +75,7 @@ public class PlayerService {
             Genere genereToAdd = switch (genere) {
                 case "MASCHIO" -> Genere.MASCHIO;
                 case "FEMMINA" -> Genere.FEMMINA;
-                case "NON BINARIO" -> Genere.NON_BINARIO;
-                default -> null;
+                default -> Genere.NON_BINARIO;
             };
 
             playerToEdit.setGenere(genereToAdd);
