@@ -67,16 +67,4 @@ public class PlayerController {
     public ResponseEntity<GamePlayer> addGiocoToPreferiti(@PathVariable Long id_game,@PathVariable Long id_player,@PathVariable boolean preferito){
         return this.playerService.setPreferito(id_player,id_game,preferito);
     }
-    @PostMapping("addPreferito/{id_player}/{id_game}")
-    public ResponseEntity<Player> addGiocoPreferito(@PathVariable Long id_player, @RequestBody Map<String, Game> request, @PathVariable Long id_game) {
-        return this.playerService.addOrUpdateGiocoPreferito(id_player, request.get("game"), id_game);
-    }
-    @PutMapping("updatePreferito/{id_player}/{id_game}")
-    public ResponseEntity<Player> updateGiocoPreferito(@PathVariable Long id_player, @RequestBody Map<String, Game> request, @PathVariable Long id_game) {
-        return this.playerService.addOrUpdateGiocoPreferito(id_player, request.get("game"), id_game);
-    }
-    @DeleteMapping("removePreferito/{id}")
-    public ResponseEntity<Player> removeGiocoPreferito(@PathVariable Long id) {
-        return this.playerService.removeGiocoPreferito(id);
-    }
 }

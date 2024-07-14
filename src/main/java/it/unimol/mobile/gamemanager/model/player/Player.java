@@ -32,7 +32,5 @@ public class Player {
     @JsonIgnore()
     private List<GamePlayer> giochiPosseduti;
 
-    @OneToOne(cascade = CascadeType.MERGE)
-    private Game giocoPreferito;
-
+    private String giocoPreferito;
 }

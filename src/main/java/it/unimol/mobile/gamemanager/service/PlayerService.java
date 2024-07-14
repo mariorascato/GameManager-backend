@@ -96,6 +96,7 @@ public class PlayerService {
             playerToUpdate.setPassword(player.getPassword());
             playerToUpdate.setPiattaformaPreferita(player.getPiattaformaPreferita());
             playerToUpdate.setGiochiPosseduti(player.getGiochiPosseduti());
+            playerToUpdate.setGiocoPreferito(player.getGiocoPreferito());
 
             this.playerRepository.save(playerToUpdate);
 
@@ -146,33 +147,4 @@ public class PlayerService {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
-    public ResponseEntity<Player> addOrUpdateGiocoPreferito(Long id_player, Game game, Long id_game) {
-        if (playerRepository.findById(id_player).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } else if (gameRepository.findById(id_game).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        Player player = playerRepository.findById(id_player).get();
-
-        player.setGiocoPreferito(game);
-        playerRepository.save(player);
-
-        return ResponseEntity.status(HttpStatus.OK).body(player);
-    }
-
-    public ResponseEntity<Player> removeGiocoPreferito(Long id) {
-        if (playerRepository.findById(id).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } else {
-            Player playerToUpdate = playerRepository.findById(id).get();
-            playerToUpdate.setGiocoPreferito(null);
-            playerRepository.save(playerToUpdate);
-
-            return ResponseEntity.status(HttpStatus.OK).body(playerToUpdate);
-        }
-    }
-
-
 }
