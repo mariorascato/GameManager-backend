@@ -23,6 +23,8 @@ public class Player {
 
     private String password;
 
+    private String avatar;
+
     private Genere genere;
     private LocalDate birthday;
     private String piattaformaPreferita;
